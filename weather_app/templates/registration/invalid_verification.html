@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Неправильная ссылка
+{% endblock %}
+
+{% block main %}
+    <p class="success-p">Ваша ссылка устарела или некорректа. Попробуйте еще раз</p>
+    <a href="{% url 'login' %}">Log-in</a>
+{% endblock main %}

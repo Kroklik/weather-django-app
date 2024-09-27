@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block main %}
+    <div class="form-container">
+        <form action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            {% if form.non_field_errors %}
+                <div style="color: red; margin-bottom: 10px">{{ form.non_field_errors.as_text }}</div>
+            {% endif %}
+            {% for field in form %}
+                <div class="form-group">
+                    <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.errors %}
+                        <div style="color: red;">{{ field.errors.as_text }}</div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            <button type="submit" class="form-button">Войти</button>
+        </form>
+        <a href="{% url 'register' %}" class="register-link">Нету аккаунта?</a>
+    </div>
+{% endblock main %}

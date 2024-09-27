@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+<style>
+    .blur {
+        filter: blur(10px); /* Измените значение, чтобы отрегулировать степень размытия */
+        pointer-events: none; /* Это предотвратит взаимодействие с элементами внутри карточки */
+    }
+
+    .centered-message {
+        text-align: center; /* Центрирование текста */
+        margin: 20px; /* Отступы для улучшения внешнего вида */
+        font-size: 1.5em; /* Размер шрифта для сообщения */
+        color: #333; /* Цвет текста */
+    }
+</style>
+
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+
+{% block main %}
+    {% if request.user.is_authenticated %}
+        <div class="weather-container">
+            {% for weather_info in weather_infos %}
+                <div class="weather-card">
+                    <h1 class="country-name">{{ weather_info.country }}</h1>
+                    <h2 class="city-name">{{ weather_info.city }}</h2>
+                    <div class="weather-info">
+                        <p class="temperature">Температура: <span>{{ weather_info.temperature }}°C</span></p>
+                        <p class="wind-speed">Скорость ветра: <span>{{ weather_info.wind }} м/с</span></p>
+                        <p class="condition">Погода: <span>{{ weather_info.weather_status }}</span></p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+
+        <div class="weather-container centered">
+            <div class="weather-card">
+                <img src="{% static 'weather/assets/lock.svg' %}" alt="" class="lock">
+                <div class="weather-info">
+                    <p class="temperature">Войдите в аккаунт, чтобы смотреть погоду</p>
+                </div>
+            </div>
+
+        </div>
+
+    {% endif %}
+{% endblock %}
+

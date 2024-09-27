@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Успешный вход
+{% endblock title %}
+
+{% block main %}
+    {% if request.user.is_authenticated %}
+    <div class="success-container">
+        <div class="success-login-container">
+            <p class="success-p">Вы успешно вошли в свой аккаунт!</p>
+            <a href="{% url 'index' %}" class="sigma">Главная страница</a>
+        </div>
+    </div>
+    {% else %}
+    <div class="success-container">
+        <div class="success-login-container">
+            <p class="success-p">Вы не вошли в аккаунт</p>
+            <a href="{% url 'index' %}" class="success-link">Главная страница</a>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}
